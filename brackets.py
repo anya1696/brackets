@@ -3,22 +3,22 @@ inversion = '-'
 priority = ['-', '&', 'v', '>', '=']
 
 
-def rule_rpe_brackets(s_string):  # Добавляет скобки к аргументам
+def rule_rpe_brackets(s_string_first):  # Добавляет скобки к аргументам
     open_bracket = '('
     close_bracket = ')'
     reserved_symbols = priority
     reserved_symbols.append(open_bracket)
     reserved_symbols.append(close_bracket)
     i = 0
-    while i < len(s_string) - 1:
-        if s_string[i] not in reserved_symbols:
-            if s_string[i - 1] != open_bracket and s_string[i + 1] != close_bracket:
-                s_string = s_string.replace(s_string[i], open_bracket + s_string[i] + close_bracket)
+    while i < len(s_string_first) - 1:
+        print(i)
+        if s_string_first[i] not in reserved_symbols:
+            if s_string_first[i - 1] != open_bracket or s_string_first[i + 1] != close_bracket:
+                s_string_first = s_string_first.replace(s_string_first[i], open_bracket + s_string_first[i] + close_bracket)
         i += 1
-    if s_string[len(s_string) - 1] not in reserved_symbols:
-        s_string = s_string.replace(s_string[len(s_string) - 1],
-                                    open_bracket + s_string[len(s_string) - 1] + close_bracket)
-    return s_string
+    if s_string_first[len(s_string_first) - 1] not in reserved_symbols:
+        s_string_first = s_string_first.replace(s_string_first[len(s_string_first) - 1],open_bracket + s_string_first[len(s_string_first) - 1] + close_bracket)
+    return s_string_first
 
 
 def rule_inversion(s_sting):  # добавляет скобки к отрицанию
@@ -66,19 +66,21 @@ def rule_conjunction(s_string):
     i = 0
     y = 0
     while i < len(s_string) - 1:
+        print(i)
         if s_string[i] == '&':
             print('DAAAAAAAAAAAAAAAAAAAa')
             y = i
-            while ((counter_open_brackets == 0 or counter_close_brackets == 0) or counter_open_brackets != counter_close_brackets) \
-                    and y < len(s_string):
+            while ((counter_open_brackets == 0 or counter_close_brackets == 0) or counter_open_brackets != counter_close_brackets) and y < len(s_string):
                 y -= 1
                 if s_string[y] == open_bracket:
                     counter_open_brackets += 1
                 if s_string[y] == close_bracket:
                     counter_close_brackets += 1
+                s_in_bracket += s_string[y]
                 print(s_in_bracket, '| ', '|', open_bracket + s_in_bracket + close_bracket)
             counter_close_brackets = 0
             counter_open_brackets = 0
+            print(y)
             while equals_counters != 2:
                 if s_string[y] == open_bracket:
                     counter_open_brackets += 1
@@ -87,8 +89,11 @@ def rule_conjunction(s_string):
                 s_in_bracket += s_in_bracket[y]
                 if counter_open_brackets == counter_close_brackets:
                     equals_counters = +1
-            s_sting = s_sting.replace(s_in_bracket, open_bracket + s_in_bracket + close_bracket)
-    return s_sting
+                y+=1
+            s_string = s_string.replace(s_in_bracket, open_bracket + s_in_bracket + close_bracket)
+            print(s_string)
+        i+=1
+    return s_string
 
 
 s = input()
@@ -105,5 +110,5 @@ s = rule_rpe_brackets(s)
 print(s, ' pre br')
 s = rule_inversion(s)
 print(s, 'rule_inversion')
-s = rule_conjunction(s)
+#s = rule_conjunction(s)
 print(s)
