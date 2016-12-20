@@ -45,7 +45,6 @@ def rule_inversion(s_sting):  # добавляет скобки к отрица�
                 s_in_bracket += s_sting[y]
             counter_open_brackets = 0
             counter_close_brackets = 0
-            print(s_in_bracket)
             if y + 1 > len(s_sting) - 1:
                 y = -1
             if i - 1 < 0:
@@ -94,12 +93,8 @@ def rule_conjunction(s_string_con, operation):  # два аргумента , л
                     counter_open_brackets = 0
                 y += 1
             if y == len(s_string_con) - 1 or k == 0:
-                print(s_in_bracket)
-                print(s_in_bracket, ' | k - ', k , '|y - ',y , '*****' , len(s_in_bracket) , ' ' , len(s_string_con))
                 s_string_con = s_string_con.replace(s_in_bracket, open_bracket + s_in_bracket + close_bracket)
             elif s_string_con[k - 1] != open_bracket and s_string_con[y + 1] != close_bracket and len(s_in_bracket) > 0:
-                print(s_in_bracket)
-                print(s_in_bracket, ' | k - ', k , '|y - ',y , '*****' , len(s_in_bracket) , ' ' , len(s_string_con))
                 s_string_con = s_string_con.replace(s_in_bracket, open_bracket + s_in_bracket + close_bracket)
             s_in_bracket = ''
             i+=1
@@ -143,11 +138,9 @@ def rule_implication(s_string_imp):
                     counter_open_brackets = 0
                 y += 1
             if y == len(s_string_imp) - 1 or k == 0:
-                print(s_in_bracket, ' | k - ', k , '|y - ',y , '*****' , len(s_in_bracket) , ' ' , len(s_string_imp))
                 s_string_imp = s_string_imp.replace(s_in_bracket, open_bracket + s_in_bracket + close_bracket)
                 i = len(s_string_imp)
             elif s_string_imp[k - 1] != open_bracket and s_string_imp[y + 1] != close_bracket and len(s_in_bracket) > 0:
-                print(s_in_bracket , ' | k - ', k , '|y - ',y)
                 s_string_imp = s_string_imp.replace(s_in_bracket, open_bracket + s_in_bracket + close_bracket)
                 i = len(s_string_imp)
             s_in_bracket = ''
